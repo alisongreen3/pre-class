@@ -1,0 +1,31 @@
+#
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#create a simple app that takes a standard normal statistic and 
+#displays the probability of achieving that value or greater in a
+#standard normal distribution. In other words it takes a (z) value
+#and gives a p-value.
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+
+
+ui <- fluidPage(
+    titlePanel("Preclass Work"),
+    numericInput("zscore", "Z Score", -1, min = -10, max = 10),
+    verbatimTextOutput("value")
+)
+
+server <- function(input, output){
+        output$value <- renderText({
+                    value <- 1-pnorm(abs(input$zscore))
+        })
+}
+
+
+shinyApp(ui = ui, server = server)
